@@ -1,0 +1,12 @@
+
+# Generated attendance data
+students.txt
+attendance.txt
+
+# Compiled program
+AttendX.exe
+main.exe
+*.o
+
+# IDE and editor files
+.vscode/
