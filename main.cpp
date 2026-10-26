@@ -70,7 +70,8 @@ public:
         if (totalClasses == 0)
             return 0.0;
 
-        return (100.0 * attended) / totalClasses; ;
+        return (100.0 * attended) / totalClasses;
+        ;
     }
 
     void markAttendance(bool present)
@@ -130,7 +131,7 @@ private:
         }
     }
 
-    //Putting data from file to vector
+    // Putting data from file to vector
     void loadStudents()
     {
         ifstream file(studentFile);
@@ -147,7 +148,7 @@ private:
         {
             int pos = line.find(" | ");
 
-            if (pos == string::npos)    //Checking whether a substring exists, npos means “no position found”
+            if (pos == string::npos) // Checking whether a substring exists, npos means “no position found”
                 continue;
 
             string idText = line.substr(0, pos);
@@ -184,7 +185,7 @@ private:
             string attendedText = line.substr(pos1 + 3, pos2 - pos1 - 3);
             string totalText = line.substr(pos2 + 3);
 
-            int attended = stoi(attendedText);  //Converting int from string, stoi means "string to integer"
+            int attended = stoi(attendedText); // Converting int from string, stoi means "string to integer"
             int total = stoi(totalText);
 
             for (Student &student : students)
@@ -219,7 +220,7 @@ public:
 
     void addStudent()
     {
-        string name, rollNO ;
+        string name, rollNO;
 
         cout << "Enter students Roll NO: ";
         cin >> rollNO;
@@ -231,7 +232,7 @@ public:
         }
 
         cout << "Enter student name: ";
-        getline(cin >> ws, name);   //ws removes leftover leading whitespace
+        getline(cin >> ws, name); // ws removes leftover leading whitespace
 
         if (name.empty())
         {
@@ -256,7 +257,8 @@ public:
             return;
         }
 
-        cout << endl << "--- Student List ---" << endl;
+        cout << endl
+             << "--- Student List ---" << endl;
         cout << left << setw(15) << "Roll NO" << setw(25) << "Name" << endl;
         cout << "-----------------------------------" << endl;
         for (Student student : students)
@@ -273,7 +275,8 @@ public:
             return;
         }
 
-        cout << endl << "Enter P for Present or A for Absent." << endl;
+        cout << endl
+             << "Enter P for Present or A for Absent." << endl;
 
         vector<bool> responses;
 
@@ -286,13 +289,14 @@ public:
                 cout << student.getName() << "(Roll NO " << student.getRollNO() << "): ";
                 cin >> mark;
 
+                cin.ignore(10000, '\n'); // Clears the remaining characters from an invalid input line. (e.g., after reading 'x' from "xyz", discards "yz" and the newline)
+
                 if (mark == 'P' || mark == 'p' || mark == 'A' || mark == 'a')
                 {
                     responses.push_back(mark == 'P' || mark == 'p');
                     break;
                 }
 
-                cin.ignore(10000, '\n');   // Clears the remaining characters from an invalid input line. (e.g., after reading 'x' from "xyz", discards "yz" and the newline)
                 cout << "Please enter only P/p or A/a." << endl;
             }
         }
@@ -316,8 +320,7 @@ public:
             return;
         }
 
-        cout << endl
-             << "--- Attendance Report ---" << endl;
+        cout << endl << "--- Attendance Report ---" << endl;
         cout << left << setw(15) << "Roll NO"
              << setw(25) << "Name"
              << right << setw(10) << "Present"
@@ -378,18 +381,20 @@ int main()
     AttendanceManager manager;
     int choice;
 
-    while (true)
+    do
     {
-        cout << endl
-             << "========== AttendX ==========" << endl;
+        cout << endl << "========== AttendX ==========" << endl;
         cout << "1. Mark attendance" << endl;
         cout << "2. Add students" << endl;
         cout << "3. Show students" << endl;
         cout << "4. Attendance report" << endl;
         cout << "5. Delete student" << endl;
         cout << "0. Exit" << endl;
-        cout << "Choose an option: ";
+        cout << endl << "Choose an option: ";
 
+        cin>>choice;
+
+        // choice is not an integer
         if (!(cin >> choice))
         {
             cin.clear();
@@ -421,5 +426,7 @@ int main()
         default:
             cout << "Invalid choice. Try again." << endl;
         }
-    }
+    }while(choice!=0);
+
+    return 0;
 }
