@@ -1,7 +1,7 @@
 #include <iostream>
 #include <string>
 #include <vector>
-#include <iomanip>   //for formating
+#include <iomanip>   //for formatting
 #include <fstream>   //for file
 #include <algorithm> //for max()
 
@@ -71,7 +71,6 @@ public:
             return 0.0;
 
         return (100.0 * attended) / totalClasses;
-        ;
     }
 
     void markAttendance(bool present)
@@ -108,7 +107,7 @@ private:
             return;
         }
 
-        // Format: ID | name
+        // Format: Roll No | name
         for (Student student : students)
         {
             file << student.getRollNO() << " | " << student.getName() << endl;
@@ -124,7 +123,7 @@ private:
             return;
         }
 
-        // Format: ID | attended classes | total classes
+        // Format: Roll No | attended classes | total classes
         for (Student student : students)
         {
             file << student.getRollNO() << " | " << student.getAttended() << " | " << student.getTotalClasses() << endl;
@@ -138,7 +137,7 @@ private:
 
         if (!file)
         {
-            cout << "File does not exist or cannot be opened!" << endl;
+             // No previous student data exists.
             return;
         }
 
@@ -165,7 +164,7 @@ private:
 
         if (!file)
         {
-            cout << "Attendance file does not exist or cannot be opened!" << endl;
+            // No previous attendance data exists.
             return;
         }
 
@@ -257,8 +256,7 @@ public:
             return;
         }
 
-        cout << endl
-             << "--- Student List ---" << endl;
+        cout << endl << "--- Student List ---" << endl;
         cout << left << setw(15) << "Roll NO" << setw(25) << "Name" << endl;
         cout << "-----------------------------------" << endl;
         for (Student student : students)
@@ -391,8 +389,6 @@ int main()
         cout << "5. Delete student" << endl;
         cout << "0. Exit" << endl;
         cout << endl << "Choose an option: ";
-
-        cin>>choice;
 
         // choice is not an integer
         if (!(cin >> choice))
